@@ -13,10 +13,24 @@ import {
   NavbarMenuItem,
 } from '@heroui/navbar';
 
-function NavBar() {
+import { Product } from '@/types/product';
+
+interface Props {
+  products: Product[];
+}
+
+function NavBar({ products }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = ['Home', 'Cart', 'Log Out'];
+  const normalizeCategory = (category: string) =>
+    category.trim().charAt(0).toUpperCase() +
+    category.trim().slice(1).toLowerCase();
+
+  const categories = Array.from(
+    new Set(products.map((product) => normalizeCategory(product.category))),
+  );
+
+  const menuItems = ['Home', 'Cart', ...categories, 'Log In'];
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -33,7 +47,7 @@ function NavBar() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem>
+        <NavbarItem className="hidden sm:block">
           <Button as={Link} color="primary" href="#" variant="flat">
             Cart
           </Button>
@@ -41,11 +55,11 @@ function NavBar() {
         <NavbarItem className="hidden lg:flex">
           <Link href="#">Login</Link>
         </NavbarItem>
-        <NavbarItem>
+        {/* <NavbarItem>
           <Button as={Link} color="primary" href="#" variant="flat">
             Sign Up
           </Button>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (

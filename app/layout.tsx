@@ -3,6 +3,7 @@ import { Metadata, Viewport } from 'next';
 import clsx from 'clsx';
 
 import { Providers } from './providers';
+import { getProducts } from './api/getProducts';
 
 import { siteConfig } from '@/config/site';
 import { fontSans } from '@/config/fonts';
@@ -26,11 +27,13 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const products = await getProducts.getAllProducts();
+
   return (
     <html suppressHydrationWarning lang="en">
       <head />
@@ -42,7 +45,7 @@ export default function RootLayout({
       >
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'white' }}>
           <div className="relative flex flex-col h-screen">
-            <NavBar />
+            <NavBar products={products} />
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
               {children}
             </main>
