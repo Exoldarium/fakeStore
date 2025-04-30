@@ -8,6 +8,7 @@ import { getProducts } from './api/getProducts';
 import { siteConfig } from '@/config/site';
 import { fontSans } from '@/config/fonts';
 import { NavBar } from '@/components/Navbar';
+import { CategoryNav } from '@/components/CategoryNav';
 
 export const metadata: Metadata = {
   title: {
@@ -34,6 +35,14 @@ export default async function RootLayout({
 }) {
   const products = await getProducts.getAllProducts();
 
+  const normalizeCategory = (category: string) =>
+    category.trim().charAt(0).toUpperCase() +
+    category.trim().slice(1).toLowerCase();
+
+  const categories = Array.from(
+    new Set(products.map((product) => normalizeCategory(product.category))),
+  );
+
   return (
     <html suppressHydrationWarning lang="en">
       <head />
@@ -45,7 +54,8 @@ export default async function RootLayout({
       >
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'white' }}>
           <div className="relative flex flex-col h-screen">
-            <NavBar products={products} />
+            <NavBar categories={categories} />
+            <CategoryNav categories={categories} />
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
               {children}
             </main>
