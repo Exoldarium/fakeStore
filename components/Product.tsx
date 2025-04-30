@@ -1,6 +1,6 @@
 'use client';
 
-import { Image } from '@heroui/react';
+import { Card, CardBody, CardFooter, Image } from '@heroui/react';
 
 import { Product } from '@/types/product';
 
@@ -14,23 +14,27 @@ function Products({ products }: Props) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
       {products.map((product) => (
-        <div
+        <Card
           key={product.id}
-          className="bg-white p-5 drop-shadow-lg rounded-md flex flex-col items-center justify-center"
+          isPressable
+          shadow="sm"
+          onPress={() => console.log('item pressed')}
         >
-          <Image
-            alt={product.description}
-            // height={400}
-            src={product.image}
-            width={200}
-            height={200}
-            className="object-contain"
-          />
-          <div className="flex flex-col items-start justify-start text-left">
-            <p className="p-2">{product.title}</p>
-            <p className="p-2">{product.price}</p>
-          </div>
-        </div>
+          <CardBody className="overflow-visible p-0 flex-none">
+            <Image
+              alt={product.title}
+              className="w-full object-contain h-[180px]"
+              radius="lg"
+              shadow="sm"
+              src={product.image}
+              width="100%"
+            />
+          </CardBody>
+          <CardFooter className="text-small justify-start items-start text-left flex flex-col">
+            <p className="py-2 font-bold">{product.title}</p>
+            <p className="text-default-500 py-2">${product.price}</p>
+          </CardFooter>
+        </Card>
       ))}
     </div>
   );
