@@ -9,12 +9,14 @@ import { Products } from '@/components/Product';
 // React Hook Form for search, checkout/registration.
 // next-intl for multilingual product categories.
 
+// TODO: pagination
+
 export default async function Home() {
   const products = await getProducts.getAllProducts();
 
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-xl text-center justify-center">
+    <section className="flex flex-col items-center justify-center gap-4 py-4 md:py-6">
+      <div className="inline-block text-center justify-center py-10 px-20">
         <Products products={products} />
       </div>
     </section>

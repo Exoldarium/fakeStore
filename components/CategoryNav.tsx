@@ -10,14 +10,14 @@ function CategoryNav({ categories }: Props) {
   const navItems = [...categories];
 
   return (
-    <Navbar>
+    <Navbar className="hidden sm:flex">
       <NavbarContent
         justify="center"
-        className="hidden sm:flex gap-3 items-center text-center"
+        className="gap-3 items-center text-center"
       >
         {navItems.map((item, index) => (
           <NavbarItem key={`${item}-${index}`}>
-            <Link color="foreground" href="#">
+            <Link color="foreground" href="#" className="hover:text-blue-500">
               {item}
             </Link>
           </NavbarItem>
