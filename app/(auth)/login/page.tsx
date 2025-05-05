@@ -2,6 +2,7 @@
 
 import { Link } from '@heroui/link';
 import { Button, Form, Input } from '@heroui/react';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 type Inputs = {
@@ -10,6 +11,7 @@ type Inputs = {
 };
 
 function LoginPage() {
+  const [isLogin, setIsLogin] = useState(true);
   const {
     register,
     handleSubmit,
@@ -18,6 +20,13 @@ function LoginPage() {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+  const endpoint = isLogin ? '/auth/login' : '/users';
+
+  if (errors.email || errors.password)
+    throw new Error('There was an error with the login!');
+
+  console.log(endpoint);
 
   console.log(watch('email'));
 
@@ -54,12 +63,19 @@ function LoginPage() {
         />
         <div className="flex gap-2">
           <Button color="primary" type="submit">
-            Submit
-          </Button>
-          <Button type="reset" variant="flat">
-            Reset
+            {isLogin ? 'Login' : 'Register'}
           </Button>
         </div>
+
+        <p className="text-center text-sm">
+          {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
+          <button
+            className="underline text-blue-600"
+            onClick={() => setIsLogin(!isLogin)}
+          >
+            {isLogin ? 'Register' : 'Login'}
+          </button>
+        </p>
       </Form>
     </div>
   );
