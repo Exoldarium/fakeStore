@@ -2,13 +2,8 @@ import '@/styles/globals.css';
 import { Metadata, Viewport } from 'next';
 import clsx from 'clsx';
 
-import { Providers } from './providers';
-import { getProducts } from './api/getProducts';
-
 import { siteConfig } from '@/config/site';
 import { fontSans } from '@/config/fonts';
-import { NavBar } from '@/components/Navbar';
-import { CategoryNav } from '@/components/CategoryNav';
 
 export const metadata: Metadata = {
   title: {
@@ -33,16 +28,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const products = await getProducts.getAllProducts();
-
-  const normalizeCategory = (category: string) =>
-    category.trim().charAt(0).toUpperCase() +
-    category.trim().slice(1).toLowerCase();
-
-  const categories = Array.from(
-    new Set(products.map((product) => normalizeCategory(product.category))),
-  );
-
   return (
     <html suppressHydrationWarning lang="en">
       <head />
@@ -52,16 +37,7 @@ export default async function RootLayout({
           fontSans.variable,
         )}
       >
-        <Providers themeProps={{ attribute: 'class', defaultTheme: 'white' }}>
-          <div className="relative flex flex-col h-screen">
-            <NavBar categories={categories} />
-            <CategoryNav categories={categories} />
-            <main className="container mx-auto max-w-7xl px-6 flex-grow">
-              {children}
-            </main>
-            <footer className="w-full flex items-center justify-center py-3"></footer>
-          </div>
-        </Providers>
+        {children}
       </body>
     </html>
   );

@@ -31,7 +31,9 @@ function NavBar({ categories }: Props) {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <p className="font-bold text-inherit">Fake Store</p>
+          <Link href="/">
+            <p className="font-bold text-inherit">Fake Store</p>
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
@@ -86,7 +88,7 @@ function NavBar({ categories }: Props) {
           </Button>
         </NavbarItem>
         <NavbarItem>
-          <Link href="#">Login</Link>
+          <Link href="/login">Login</Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>

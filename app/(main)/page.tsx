@@ -1,4 +1,4 @@
-import { getProducts } from './api/getProducts';
+import { getProducts } from '../api/getProducts';
 
 import { Products } from '@/components/Product';
 
