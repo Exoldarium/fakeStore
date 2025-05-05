@@ -21,7 +21,7 @@ interface Props {
 function NavBar({ categories }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = ['Home', 'Cart', ...categories, 'Log In'];
+  const menuItems = ['Home', 'Cart', ...categories, 'Log in'];
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -103,7 +103,7 @@ function NavBar({ categories }: Props) {
                     ? 'danger'
                     : 'foreground'
               }
-              href="#"
+              href={`/${item.toLowerCase().replace(/\s+/g, '')}`}
               size="lg"
             >
               {item}
