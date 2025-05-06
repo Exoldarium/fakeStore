@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 type Inputs = {
+  username?: string;
   email: string;
   password: string;
 };
@@ -46,6 +47,23 @@ function LoginPage() {
           type="email"
           {...register('email')}
         />
+
+        {!isLogin && (
+          <Input
+            isRequired
+            errorMessage="Please enter a valid username"
+            label="Username"
+            labelPlacement="outside"
+            placeholder="Enter your username"
+            type="text"
+            {...register('username')}
+            validate={(value) => {
+              if (value.length < 3) {
+                return 'Password must be at least 3 characters long';
+              }
+            }}
+          />
+        )}
 
         <Input
           isRequired

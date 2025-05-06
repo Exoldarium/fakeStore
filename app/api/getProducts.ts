@@ -10,7 +10,7 @@ async function getAllProducts() {
   });
 
   if (!res.ok)
-    throw new Error('Something went wrong while fetchin all products');
+    throw new Error('Something went wrong while fetching all products');
 
   const rawData = await res.json();
 
@@ -24,8 +24,6 @@ async function getAllProducts() {
     notFound();
   }
 }
-
-// TODO: ISR for single product
 
 async function getSingleProduct(params: string) {
   const res = await fetch(`https://fakestoreapi.com/products/${params}`, {

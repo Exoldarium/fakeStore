@@ -2,7 +2,6 @@ import '@/styles/globals.css';
 import { Metadata } from 'next';
 
 import { getProducts } from '../api/getProducts';
-import { Providers } from '../providers';
 
 import { siteConfig } from '@/config/site';
 import { NavBar } from '@/components/Navbar';
@@ -36,16 +35,14 @@ export default async function MainLayout({
 
   return (
     <>
-      <Providers themeProps={{ attribute: 'class', defaultTheme: 'white' }}>
-        <div className="relative flex flex-col h-screen">
-          <NavBar categories={categories} />
-          <CategoryNav categories={categories} />
-          <main className="container mx-auto max-w-7xl px-6 flex-grow">
-            {children}
-          </main>
-          <footer className="w-full flex items-center justify-center py-3"></footer>
-        </div>
-      </Providers>
+      <div className="relative flex flex-col h-screen">
+        <NavBar categories={categories} />
+        <CategoryNav categories={categories} />
+        <main className="container mx-auto max-w-7xl px-6 flex-grow">
+          {children}
+        </main>
+        <footer className="w-full flex items-center justify-center py-3"></footer>
+      </div>
     </>
   );
 }

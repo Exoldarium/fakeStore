@@ -1,3 +1,4 @@
+import { auth } from '../api/auth';
 import { getProducts } from '../api/getProducts';
 
 import { Products } from '@/components/Product';
@@ -13,6 +14,10 @@ import { Products } from '@/components/Product';
 
 export default async function Home() {
   const products = await getProducts.getAllProducts();
+
+  const users = await auth.getAllUsers();
+
+  console.log(users);
 
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-4 md:py-6">
