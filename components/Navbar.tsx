@@ -88,7 +88,11 @@ function NavBar({ categories }: Props) {
                     ? 'danger'
                     : 'foreground'
               }
-              href={`/${item.toLowerCase().replace(/\s+/g, '')}`}
+              href={
+                item === 'Home'
+                  ? '/'
+                  : `/${item.toLowerCase().replace(/\s+/g, '')}`
+              }
               size="lg"
             >
               {item}
