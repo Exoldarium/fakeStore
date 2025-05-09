@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Card, CardBody, CardFooter, Image } from '@heroui/react';
+import { Button, Card, CardBody, CardFooter, Image, Link } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 
 import { Product } from '@/types/product';
@@ -21,7 +21,8 @@ function Products({ products }: Props) {
       {products.map((product) => (
         <Card
           key={product.id}
-          // isPressable
+          isPressable
+          as={Link}
           shadow="sm"
           onPress={() => {
             router.push(`products/${product.id.toString()}`);
