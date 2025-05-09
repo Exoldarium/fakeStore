@@ -6,7 +6,7 @@ interface Props {
   };
 }
 
-export const revalidate = 60;
+export const revalidate = 600;
 
 export async function generateStaticParams() {
   const products = await getProducts.getAllProducts();

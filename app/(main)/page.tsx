@@ -12,8 +12,6 @@ import { Products } from '@/components/Product';
 
 // TODO: pagination
 
-export const revalidate = 3600;
-
 export default async function Home() {
   const products = await getProducts.getAllProducts();
 
