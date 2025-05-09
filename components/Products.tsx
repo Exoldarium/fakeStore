@@ -55,7 +55,9 @@ function Products({ products }: Props) {
           <div className="flex flex-row">
             <CardFooter className="text-small justify-start items-start text-left flex flex-col">
               <p className="py-2 font-bold">{product.title}</p>
-              <p className="text-default-500 py-2">${product.price}</p>
+              <p className="text-default-500 py-2">
+                ${product.price.toFixed(2)}
+              </p>
             </CardFooter>
             <Button
               color="primary"

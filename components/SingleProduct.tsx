@@ -35,7 +35,6 @@ function SingleProduct({ product, routeId }: Props) {
   return (
     <Card className="w-full max-w-5xl mx-auto p-6">
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Image Section */}
         <div className="flex-1 flex justify-center items-center bg-default-100 rounded-lg p-4">
           <Image
             isZoomed
@@ -46,7 +45,6 @@ function SingleProduct({ product, routeId }: Props) {
           />
         </div>
 
-        {/* Details Section */}
         <div className="flex-1 flex flex-col justify-between">
           <CardHeader className="p-0">
             <h1 className="text-2xl font-bold">{data.title}</h1>
