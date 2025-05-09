@@ -1,10 +1,14 @@
 'use client';
 
-import { Button, Card, CardBody, CardFooter, Image } from '@heroui/react';
+import { Button, Card, CardBody, CardFooter, Image, Link } from '@heroui/react';
 import { useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 
-import { Product } from '@/types/product';
+import { ProductsLoading } from './ProductsLoading';
+
 import { useCartStore } from '@/app/providers/cartStoreProvider';
+import { getProducts } from '@/app/api/getProducts';
+import { Product } from '@/types/product';
 
 interface Props {
   products: Product[];
@@ -14,14 +18,24 @@ function Products({ products }: Props) {
   const router = useRouter();
   const addItem = useCartStore((state) => state.addItem);
 
-  console.log(products);
+  const { data, isLoading } = useQuery({
+    queryKey: ['products'],
+    queryFn: () => getProducts.getAllProducts(),
+    initialData: products,
+  });
+
+  console.log(isLoading);
+
+  if (isLoading) return <ProductsLoading />;
+  if (!data) return undefined;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-      {products.map((product) => (
+      {data.map((product) => (
         <Card
           key={product.id}
-          // isPressable
+          isPressable
+          as={Link}
           shadow="sm"
           onPress={() => {
             router.push(`products/${product.id.toString()}`);

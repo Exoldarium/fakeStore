@@ -1,4 +1,5 @@
 import { getProducts } from '@/app/api/getProducts';
+import { SingleProduct } from '@/components/SingleProduct';
 
 interface Props {
   params: {
@@ -6,15 +7,7 @@ interface Props {
   };
 }
 
-export const revalidate = 600;
-
-export async function generateStaticParams() {
-  const products = await getProducts.getAllProducts();
-
-  return products.map((product) => ({
-    id: product.id.toString(),
-  }));
-}
+export const revalidate = 60;
 
 async function Product({ params }: Props) {
   const { id } = params;
@@ -24,8 +17,8 @@ async function Product({ params }: Props) {
   console.log(id, product);
 
   return (
-    <div>
-      <p>{product.title}</p>
+    <div className="inline-block text-center justify-center py-10 px-20">
+      <SingleProduct product={product} routeId={id} />
     </div>
   );
 }
